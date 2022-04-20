@@ -1,0 +1,9 @@
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+export const SET_TOKEN = "SET_TOKEN";
+export const SET_REFRESH = "SET_REFRESH";
+export const SET_ROLE = "SET_ROLE";
+export const LOG_OUT_STARTING = "LOG_OUT_STARTING";
+export const LOG_OUT_SUCCESS = "LOG_OUT_SUCCESS";
+export const LOGOUT_FAIL = "LOGOUT_FAIL";
