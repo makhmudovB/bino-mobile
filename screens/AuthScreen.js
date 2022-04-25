@@ -1,10 +1,11 @@
-import { Text } from "react-native";
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import CustomStatusBar from "../components/CustomStatusBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuth } from "../redux/Actions/authActions";
 import Loading from "../components/Loading";
+import global from "../resourses/global";
+import { Bold40, Normal14, Normal18 } from "../resourses/palettes";
 
 export const AuthScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export const AuthScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const routing = () => navigation.replace("Home");
+  const routing = () => navigation.replace("Users");
 
   const handleSend = () => {
     const body = {
@@ -28,12 +29,17 @@ export const AuthScreen = ({ navigation }) => {
       })
     );
   };
-  if (loading) return <Loading color={"#004787"} />;
+  if (loading) return <Loading color={global.colors.main} />;
   return (
     <AuthWrap>
-      <CustomStatusBar barStyle={"light-content"} bgColor="#1D3475" />
-      <Title>Кириш</Title>
-      <SubTitle>Давом эттириш учун, киринг</SubTitle>
+      <CustomStatusBar
+        barStyle={"light-content"}
+        bgColor={global.colors.main2}
+      />
+      <Bold40 color={global.colors.white}>Кириш</Bold40>
+      <Normal18 color={global.colors.gray3} mt={15} mb={30}>
+        Давом эттириш учун, киринг
+      </Normal18>
       <Input
         placeholder="Логин"
         value={login}
@@ -49,41 +55,27 @@ export const AuthScreen = ({ navigation }) => {
         onPress={() => handleSend()}
         disabled={!login && !password ? true : false}
       >
-        <Text>Кириш</Text>
+        <Normal14 color={global.colors.main}>Кириш</Normal14>
       </Button>
     </AuthWrap>
   );
 };
 
 const AuthWrap = styled.View`
-  background-color: #1d3475;
-  height: 100%;
+  background-color: ${global.colors.main2};
+  height: ${global.strings.height}px;
   align-items: center;
   justify-content: center;
   padding: 0 25px;
 `;
 
-const Title = styled.Text`
-  color: #fff;
-  font-weight: 700;
-  font-size: 40px;
-`;
-
-const SubTitle = styled.Text`
-  color: #b7b7b7;
-  font-weight: 400;
-  font-size: 18px;
-  margin-top: 15px;
-  margin-bottom: 30px;
-`;
-
 const Input = styled.TextInput`
-  background-color: #fff;
+  background-color: ${global.colors.white};
   width: 100%;
   height: 40px;
   border-radius: 15px;
   margin-top: 30px;
-  color: #9e9e9e;
+  color: ${global.colors.gray4};
   font-size: 16px;
   font-weight: 500;
   padding-left: 15px;
@@ -91,7 +83,7 @@ const Input = styled.TextInput`
 
 const Button = styled.TouchableOpacity`
   margin-top: 25px;
-  background-color: #ffb800;
+  background-color: ${global.colors.yellow};
   border-radius: 12px;
   width: 50%;
   height: 40px;

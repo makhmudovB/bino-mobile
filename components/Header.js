@@ -1,17 +1,22 @@
-import { View, Text, Image } from "react-native";
+import { View, Image } from "react-native";
 import React, { useState } from "react";
 import CustomStatusBar from "./CustomStatusBar";
 import styled from "styled-components/native";
-import { useDispatch } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/Actions/authActions";
+import { useNavigation } from "@react-navigation/native";
+import global from "../resourses/global";
+import { Normal14, SemiBold16 } from "../resourses/palettes";
 
-const Header = ({ barStyle, bgColor, role, title }) => {
-  const dispatch = useDispatch();
+const Header = ({ barStyle, bgColor, role, title, openDrawer }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [userMenu, setUserMenu] = useState(false);
+
+  const { token, access, response } = useSelector((state) => state.auth);
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logout({ refresh: response?.refresh }, token));
     navigation.navigate("Auth");
     setUserMenu(false);
   };
@@ -19,13 +24,13 @@ const Header = ({ barStyle, bgColor, role, title }) => {
     <>
       <CustomStatusBar barStyle={barStyle} bgColor={bgColor} />
       <HeaderWrap>
-        <BurgerWrap>
+        <BurgerWrap onPress={openDrawer}>
           <Burger>
             <View
               style={{
                 width: 20,
                 height: 3,
-                backgroundColor: "#004787",
+                backgroundColor: global.colors.main,
                 borderRadius: 2,
               }}
             />
@@ -33,7 +38,7 @@ const Header = ({ barStyle, bgColor, role, title }) => {
               style={{
                 width: 12,
                 height: 3,
-                backgroundColor: "#004787",
+                backgroundColor: global.colors.main,
                 borderRadius: 2,
                 marginTop: 5,
               }}
@@ -42,13 +47,15 @@ const Header = ({ barStyle, bgColor, role, title }) => {
               style={{
                 width: 20,
                 height: 3,
-                backgroundColor: "#004787",
+                backgroundColor: global.colors.main,
                 borderRadius: 2,
                 marginTop: 5,
               }}
             />
           </Burger>
-          <BurgerTitle>{title}</BurgerTitle>
+          <SemiBold16 color={global.colors.main} ml={15}>
+            {title}
+          </SemiBold16>
         </BurgerWrap>
         <UserInfoWrap onPress={() => setUserMenu(!userMenu)}>
           <Image
@@ -58,18 +65,14 @@ const Header = ({ barStyle, bgColor, role, title }) => {
             style={{ width: 30, height: 30 }}
           />
           <View style={{ marginLeft: 15 }}>
-            <Text style={{ color: "#004787", fontSize: 16, fontWeight: "500" }}>
-              Full Name
-            </Text>
-            <Text style={{ color: "#00C6FF", fontSize: 14, fontWeight: "400" }}>
-              {role}
-            </Text>
+            <SemiBold16 color={global.colors.main}>Full Name</SemiBold16>
+            <Normal14 color={global.colors.blue}>{role}</Normal14>
           </View>
         </UserInfoWrap>
         {userMenu && (
           <LogoutWrap>
             <Button onPress={() => handleLogout()}>
-              <Text style={{ color: "#fff" }}>Чикиш</Text>
+              <Normal14 color={global.colors.white}>Чикиш</Normal14>
             </Button>
           </LogoutWrap>
         )}
@@ -81,9 +84,9 @@ const Header = ({ barStyle, bgColor, role, title }) => {
 export default Header;
 
 const HeaderWrap = styled.View`
-  width: 100%;
+  width: ${global.strings.width}px;
   height: 50px;
-  background-color: #fff;
+  background-color: ${global.colors.white};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -101,13 +104,6 @@ const Burger = styled.View`
   height: 20px;
 `;
 
-const BurgerTitle = styled.Text`
-  color: #004787;
-  font-weight: 500;
-  font-size: 16px;
-  margin-left: 15px;
-`;
-
 const UserInfoWrap = styled.TouchableOpacity`
   position: relative;
   flex-direction: row;
@@ -119,19 +115,21 @@ const LogoutWrap = styled.View`
   position: absolute;
   top: 40px;
   right: 10px;
-  background-color: #fff;
+  background-color: ${global.colors.white};
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
   elevation: 5;
+  z-index: 10;
 `;
 
 const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  background-color: #004787;
+  background-color: ${global.colors.main};
   padding: 10px;
   width: 160px;
   height: 40px;
   border-radius: 10px;
+  z-index: 10;
 `;

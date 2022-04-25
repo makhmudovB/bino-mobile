@@ -1,9 +1,10 @@
-import { View, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import { useSelector, useDispatch } from "react-redux";
 import { createUser, updateUser } from "../redux/Actions/userActions";
 import { refreshToken } from "../redux/Actions/authActions";
+import global from "../resourses/global";
+import { Normal14, Normal18, SemiBold20 } from "../resourses/palettes";
 
 const UserModal = ({ hideModal, updateData }) => {
   const dispatch = useDispatch();
@@ -33,11 +34,13 @@ const UserModal = ({ hideModal, updateData }) => {
   return (
     <ModalWrap>
       <ModalView>
-        <Text style={{ color: "#004787", fontSize: 20, fontWeight: "600" }}>
+        <SemiBold20 color={global.colors.main}>
           Янги фойдаланувчи яратиш
-        </Text>
+        </SemiBold20>
         <InputWrap>
-          <Label>Логин</Label>
+          <Normal18 color={global.colors.gray1} ml={15}>
+            Логин
+          </Normal18>
           <Input
             value={updateData ? updateLogin : login}
             onChangeText={(e) => {
@@ -46,18 +49,20 @@ const UserModal = ({ hideModal, updateData }) => {
           />
         </InputWrap>
         <InputWrap>
-          <Label>Пароль</Label>
+          <Normal18 color={global.colors.gray1} ml={15}>
+            Пароль
+          </Normal18>
           <Input value={password} onChangeText={(e) => setPassword(e)} />
         </InputWrap>
         <BtnWrap>
-          <Button onPress={hideModal} color={"red"}>
-            <Text style={{ color: "#fff" }}>Бекор қилиш</Text>
+          <Button onPress={hideModal} color={global.colors.red}>
+            <Normal14 color={global.colors.white}>Бекор қилиш</Normal14>
           </Button>
           <Button
             onPress={() => handleSend()}
             disabled={!login && !password && !updateLogin ? true : false}
           >
-            <Text style={{ color: "#fff" }}>Сақлаш</Text>
+            <Normal14 color={global.colors.white}>Сақлаш</Normal14>
           </Button>
         </BtnWrap>
       </ModalView>
@@ -74,7 +79,7 @@ const ModalWrap = styled.View`
   left: 0;
   right: 0;
   width: 100%;
-  height: 100%;
+  height: ${global.strings.height}px;
   background-color: rgba(0, 71, 135, 0.5);
   align-items: center;
   justify-content: center;
@@ -92,23 +97,16 @@ const InputWrap = styled.View`
   margin-top: 30px;
 `;
 
-const Label = styled.Text`
-  color: #929292;
-  margin-left: 15px;
-  font-size: 18px;
-  font-weight: 400;
-`;
-
 const Input = styled.TextInput`
   margin-top: 10px;
   width: 100%;
   height: 45px;
-  background-color: #ffffff;
+  background-color: ${global.colors.white};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
   elevation: 5;
   border-radius: 16px;
   padding-left: 15px;
-  color: #004787;
+  color: ${global.colors.main};
   font-size: 16px;
   font-weight: 500;
 `;
@@ -124,7 +122,7 @@ const Button = styled.TouchableOpacity`
   padding: 15px 20px;
   align-items: center;
   justify-content: center;
-  background-color: ${({ color = "#004787" }) => color};
+  background-color: ${({ color = global.colors.main }) => color};
   border-radius: 15px;
   margin-left: 10px;
 `;

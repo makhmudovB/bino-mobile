@@ -1,10 +1,13 @@
 {
   "expo": {
-    "name": "mobile-app",
+    "packagerOpts": {
+      "config": "metro.config.js"
+    },
+    "name": "Bino Mobile",
     "slug": "mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/unicon-logo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,13 +23,14 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "makhmudov.binoMobile",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/unicon-logo.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/unicon-logo.png"
     }
   }
 }

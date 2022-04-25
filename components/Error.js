@@ -1,40 +1,27 @@
-import { Image, Text } from "react-native";
+import { Image } from "react-native";
 import React from "react";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
+import global from "../resourses/global";
+import { Bold30, Normal14, SemiBold16 } from "../resourses/palettes";
 
 const Error = () => {
   const navigation = useNavigation();
-  const error = require("../assets/error.png");
   return (
     <Wrapper>
       <Image
-        source={error}
+        source={global.images.error}
         style={{ width: 300, height: 200 }}
         resizeMode="contain"
       />
-      <Text
-        style={{
-          fontSize: 30,
-          fontWeight: "600",
-          color: "#004787",
-          marginTop: 30,
-        }}
-      >
+      <Bold30 color={global.colors.main} mt={30}>
         Тақиқланган
-      </Text>
-      <Text
-        style={{
-          fontSize: 16,
-          fontWeight: "500",
-          color: "#929292",
-          marginTop: 20,
-        }}
-      >
+      </Bold30>
+      <SemiBold16 color={global.colors.gray1}>
         Сизда тизимга киришга ҳуқуқ ёқ
-      </Text>
+      </SemiBold16>
       <Button onPress={() => navigation.navigate("Auth")}>
-        <Text style={{ color: "#fff" }}>Ортга қайтиш</Text>
+        <Normal14 color={global.colors.white}>Ортга қайтиш</Normal14>
       </Button>
     </Wrapper>
   );
@@ -46,13 +33,13 @@ const Wrapper = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: ${({ color = "#ffffff" }) => color};
+  background-color: ${({ color = global.colors.white }) => color};
 `;
 
 const Button = styled.TouchableOpacity`
   width: 200px;
   height: 45px;
-  background-color: #004787;
+  background-color: ${global.colors.main};
   margin-top: 20px;
   border-radius: 15px;
   align-items: center;

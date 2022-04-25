@@ -1,8 +1,8 @@
 import React from "react";
-import { View, StatusBar, Text } from "react-native";
+import { View, StatusBar } from "react-native";
 import Constants from "expo-constants";
 
-export default function CustomStatusBar({barStyle, bgColor}) {
+export default function CustomStatusBar({ barStyle, bgColor }) {
   return (
     <>
       <StatusBar barStyle={barStyle} />

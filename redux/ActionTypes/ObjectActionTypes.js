@@ -1,0 +1,3 @@
+export const OBJECTS_START = "OBJECTS_START";
+export const OBJECTS_SUCCESS = "OBJECTS_START";
+export const OBJECTS_FAIL = "OBJECTS_FAIL";

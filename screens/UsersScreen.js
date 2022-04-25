@@ -1,4 +1,4 @@
-import { Modal, Text, View, TouchableOpacity } from "react-native";
+import { Modal, ScrollView } from "react-native";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components/native";
 import RowItem from "../components/RowItem";
@@ -8,11 +8,13 @@ import { refreshToken } from "../redux/Actions/authActions";
 import { getUsers } from "../redux/Actions/userActions";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import global from "../resourses/global";
+import { Normal14 } from "../resourses/palettes";
 
-const HomeScreen = () => {
+const UsersScreen = () => {
   const dispatch = useDispatch();
 
-  const [modalVisible, setModalVisible] = useState(null);
+  const [modal, setModal] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [chosen, setChosen] = useState(0);
 
@@ -27,16 +29,16 @@ const HomeScreen = () => {
   };
 
   const closeModal = () => {
-    setModalVisible(null);
+    setModal(null);
   };
 
   const createUser = useCallback(() => {
-    setModalVisible("CREATE");
+    setModal("CREATE");
     setChosen(0);
   }, []);
 
   const editUser = useCallback(({ id }) => {
-    setModalVisible("UPDATE");
+    setModal("UPDATE");
     setChosen(id);
   }, []);
 
@@ -61,17 +63,17 @@ const HomeScreen = () => {
   if (!user || !token || !access || !response) return null;
   if (response?.role !== "admin") return <Error />;
   return (
-    <HomeWrap showsVerticalScrollIndicator={false}>
+    <UsersWrap>
       <CreateUser onPress={() => createUser()}>
-        <Text style={{ color: "#004787" }}>Фойдаланувчи яратиш</Text>
+        <Normal14 color={global.colors.main}>Фойдаланувчи яратиш</Normal14>
       </CreateUser>
       <InputWrap>
         <Input value={searchValue} onChangeText={(e) => setSearchValue(e)} />
         <Button onPress={() => handleSearch()}>
-          <Text style={{ color: "#fff" }}>Қидириш</Text>
+          <Normal14 color={global.colors.white}>Қидириш</Normal14>
         </Button>
       </InputWrap>
-      <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {user?.results?.map((el, i) => {
           return (
             <RowItem
@@ -79,39 +81,35 @@ const HomeScreen = () => {
               name={el.login_name}
               number={i + 1}
               orgName={
-                el.organization?.name_cyr
-                  ? el.organization?.name_cyr
-                  : "Мавжуд эмас!"
+                el.organization?.name_cyr ? el.organization?.name_cyr : "-"
               }
               onPress={() => editUser(el)}
             />
           );
         })}
-      </View>
+      </ScrollView>
       <Modal
         animationType="fade"
         transparent={true}
-        visible={Boolean(modalVisible)}
+        visible={Boolean(modal)}
         onRequestClose={() => closeModal()}
       >
-        {modalVisible === "CREATE" && (
-          <UserModal hideModal={() => closeModal()} />
-        )}
-        {modalVisible === "UPDATE" && (
+        {modal === "CREATE" && <UserModal hideModal={() => closeModal()} />}
+        {modal === "UPDATE" && (
           <UserModal hideModal={() => closeModal()} updateData={chosenData} />
         )}
       </Modal>
-    </HomeWrap>
+    </UsersWrap>
   );
 };
 
-export default HomeScreen;
+export default UsersScreen;
 
-const HomeWrap = styled.ScrollView`
+const UsersWrap = styled.View`
   width: 100%;
   height: 100%;
   padding: 0 10px;
-  background-color: #fff;
+  background-color: ${global.colors.white};
 `;
 
 const InputWrap = styled.View`
@@ -122,7 +120,7 @@ const InputWrap = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: ${global.colors.white};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
   elevation: 5;
   border-radius: 16px;
@@ -132,14 +130,14 @@ const Input = styled.TextInput`
   width: 75%;
   height: 40px;
   border: none;
-  color: #004787;
+  color: ${global.colors.main};
   font-weight: 600;
 `;
 
 const Button = styled.TouchableOpacity`
   width: 25%;
   height: 30px;
-  background-color: #004787;
+  background-color: ${global.colors.main};
   border-radius: 12px;
   align-items: center;
   justify-content: center;
@@ -151,7 +149,7 @@ const CreateUser = styled.TouchableOpacity`
   margin-top: 15px;
   align-items: center;
   justify-content: center;
-  background-color: #ffb800;
+  background-color: ${global.colors.yellow};
   box-shadow: 0px 0px 10px rgba(255, 184, 0, 0.25);
   border-radius: 16px;
 `;

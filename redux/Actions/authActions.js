@@ -29,9 +29,9 @@ export const refreshToken = (token) => (dispatch) => {
   );
 };
 
-export const logout = () => (dispatch) => {
+export const logout = (body, token) => (dispatch) => {
   dispatch(handleType(authTypes.LOG_OUT_STARTING));
-  return ApiService.postEvent("/v1/logout", null, null)
+  return ApiService.postEvent("/v1/logout", body, token)
     .then((value) => {
       dispatch(handleType(authTypes.LOG_OUT_SUCCESS, value));
     })

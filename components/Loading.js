@@ -1,12 +1,15 @@
-import { View, Image } from "react-native";
+import { Image } from "react-native";
 import React from "react";
 import styled from "styled-components/native";
+import global from "../resourses/global";
 
 const Loading = ({ color }) => {
-  const loading = require("../assets/loading2.gif");
   return (
     <Wrapper color={color}>
-      <Image source={loading} style={{ width: 100, height: 100 }} />
+      <Image
+        source={global.images.loader}
+        style={{ width: 100, height: 100 }}
+      />
     </Wrapper>
   );
 };
@@ -17,5 +20,5 @@ const Wrapper = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: ${({ color = "#ffffff" }) => color};
+  background-color: ${({ color = global.colors.white }) => color};
 `;
