@@ -1,8 +1,5 @@
 {
   "expo": {
-    "packagerOpts": {
-      "config": "metro.config.js"
-    },
     "name": "Bino Mobile",
     "slug": "mobile-app",
     "version": "1.0.0",

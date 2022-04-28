@@ -1,4 +1,4 @@
-import * as authTypes from "../ActionTypes/AuthActionTypes";
+import * as authTypes from "../ActionTypes/authActionTypes";
 
 const initialState = {
   loading: false,

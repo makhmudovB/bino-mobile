@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 const persistConfig = {
   key: "system",
   storage: asyncStorage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "language"],
 };
 const persistReduce = persistReducer(persistConfig, rootReducer);
 

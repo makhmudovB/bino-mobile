@@ -4,9 +4,11 @@ import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import global from "../resourses/global";
 import { Bold30, Normal14, SemiBold16 } from "../resourses/palettes";
+import { useTranslation } from "react-i18next";
 
 const Error = () => {
   const navigation = useNavigation();
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <Image
@@ -15,13 +17,11 @@ const Error = () => {
         resizeMode="contain"
       />
       <Bold30 color={global.colors.main} mt={30}>
-        Тақиқланган
+        {t("error")}
       </Bold30>
-      <SemiBold16 color={global.colors.gray1}>
-        Сизда тизимга киришга ҳуқуқ ёқ
-      </SemiBold16>
+      <SemiBold16 color={global.colors.gray1}>{t("notEntry")}</SemiBold16>
       <Button onPress={() => navigation.navigate("Auth")}>
-        <Normal14 color={global.colors.white}>Ортга қайтиш</Normal14>
+        <Normal14 color={global.colors.white}>{t("goBack")}</Normal14>
       </Button>
     </Wrapper>
   );

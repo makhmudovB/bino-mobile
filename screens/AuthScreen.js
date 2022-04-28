@@ -6,9 +6,12 @@ import { getAuth } from "../redux/Actions/authActions";
 import Loading from "../components/Loading";
 import global from "../resourses/global";
 import { Bold40, Normal14, Normal18 } from "../resourses/palettes";
+import { useTranslation } from "react-i18next";
 
 export const AuthScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
+
   const { response, loading } = useSelector((state) => state.auth);
 
   const [login, setLogin] = useState("");
@@ -36,18 +39,18 @@ export const AuthScreen = ({ navigation }) => {
         barStyle={"light-content"}
         bgColor={global.colors.main2}
       />
-      <Bold40 color={global.colors.white}>Кириш</Bold40>
+      <Bold40 color={global.colors.white}>{t("enter")}</Bold40>
       <Normal18 color={global.colors.gray3} mt={15} mb={30}>
-        Давом эттириш учун, киринг
+        {t("continueEnter")}
       </Normal18>
       <Input
-        placeholder="Логин"
+        placeholder={t("login")}
         value={login}
         onChangeText={(e) => setLogin(e)}
       />
       <Input
         secureTextEntry={true}
-        placeholder="Пароль"
+        placeholder={t("password")}
         value={password}
         onChangeText={(e) => setPassword(e)}
       />
@@ -55,7 +58,7 @@ export const AuthScreen = ({ navigation }) => {
         onPress={() => handleSend()}
         disabled={!login && !password ? true : false}
       >
-        <Normal14 color={global.colors.main}>Кириш</Normal14>
+        <Normal14 color={global.colors.main}>{t("enter")}</Normal14>
       </Button>
     </AuthWrap>
   );

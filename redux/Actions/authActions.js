@@ -1,5 +1,5 @@
 import ApiService from "../../services/api";
-import * as authTypes from "../ActionTypes/AuthActionTypes";
+import * as authTypes from "../ActionTypes/authActionTypes";
 import { handleType } from "./handleTypes";
 
 export const getAuth = (payload, callback) => (dispatch) => {

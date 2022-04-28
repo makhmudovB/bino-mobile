@@ -1,0 +1,3 @@
+export const REGIONS_START = "REGIONS_START";
+export const REGIONS_SUCCESS = "REGIONS_SUCCESS";
+export const REGIONS_FAIL = "REGIONS_FAIL";

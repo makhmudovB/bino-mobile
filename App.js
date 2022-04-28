@@ -2,6 +2,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
 import { store, persistor } from "./redux/rootConfig";
 import AppContainer from "./navigation";
+import "./resourses/i18n";
 
 const App = () => {
   return (

@@ -27,8 +27,13 @@ const SelectBlock = ({
         <SelectWrap>
           {data.length > 0 ? (
             data.map((el, i) => (
-              <SelectItem key={i + 1} onPress={() => handleSelect(el.num)}>
-                <Normal14 color={global.colors.main}>{el.num}</Normal14>
+              <SelectItem
+                key={i + 1}
+                onPress={() => {
+                  handleSelect(el);
+                }}
+              >
+                <Normal14 color={global.colors.main}>{el.name_cyr}</Normal14>
               </SelectItem>
             ))
           ) : (
@@ -64,6 +69,7 @@ const SelectWrap = styled.ScrollView`
   top: 55px;
   width: 100%;
   min-height: 50px;
+  max-height: 350px;
   background-color: ${global.colors.white};
   border-radius: 15px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);

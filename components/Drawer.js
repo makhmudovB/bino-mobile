@@ -5,26 +5,40 @@ import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import global from "../resourses/global";
 import { SemiBold16 } from "../resourses/palettes";
-
-const arr = [
-  {
-    id: 1,
-    name: "Фойдаланувчилар",
-    route: "Users",
-  },
-  {
-    id: 2,
-    name: "Объектлар",
-    route: "Objects",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Drawer = ({ closeDrawer }) => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
+
   const handleNavigate = (route) => {
     navigation.navigate(route);
     closeDrawer();
   };
+
+  const arr = [
+    {
+      id: 1,
+      name: t("users"),
+      route: "Users",
+    },
+    {
+      id: 2,
+      name: t("objects"),
+      route: "Objects",
+    },
+    {
+      id: 3,
+      name: t("map"),
+      route: "Map",
+    },
+    {
+      id: 4,
+      name: t("settings"),
+      route: "Settings",
+    },
+  ];
+
   return (
     <DrawerWrap>
       <DrawerBlock>

@@ -10,9 +10,12 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 import global from "../resourses/global";
 import { Normal14 } from "../resourses/palettes";
+import SearchBlock from "../components/SearchBlock";
+import { useTranslation } from "react-i18next";
 
 const UsersScreen = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [modal, setModal] = useState(null);
   const [searchValue, setSearchValue] = useState("");
@@ -65,14 +68,14 @@ const UsersScreen = () => {
   return (
     <UsersWrap>
       <CreateUser onPress={() => createUser()}>
-        <Normal14 color={global.colors.main}>Фойдаланувчи яратиш</Normal14>
+        <Normal14 color={global.colors.main}>{t("createUser")}</Normal14>
       </CreateUser>
-      <InputWrap>
-        <Input value={searchValue} onChangeText={(e) => setSearchValue(e)} />
-        <Button onPress={() => handleSearch()}>
-          <Normal14 color={global.colors.white}>Қидириш</Normal14>
-        </Button>
-      </InputWrap>
+      <SearchBlock
+        value={searchValue}
+        onChange={setSearchValue}
+        onPress={() => handleSearch()}
+        clear={() => setSearchValue("")}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         {user?.results?.map((el, i) => {
           return (
@@ -110,37 +113,6 @@ const UsersWrap = styled.View`
   height: 100%;
   padding: 0 10px;
   background-color: ${global.colors.white};
-`;
-
-const InputWrap = styled.View`
-  width: 100%;
-  height: 40px;
-  margin-top: 15px;
-  padding: 0 15px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: ${global.colors.white};
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-  elevation: 5;
-  border-radius: 16px;
-`;
-
-const Input = styled.TextInput`
-  width: 75%;
-  height: 40px;
-  border: none;
-  color: ${global.colors.main};
-  font-weight: 600;
-`;
-
-const Button = styled.TouchableOpacity`
-  width: 25%;
-  height: 30px;
-  background-color: ${global.colors.main};
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
 `;
 
 const CreateUser = styled.TouchableOpacity`

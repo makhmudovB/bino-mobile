@@ -1,5 +1,5 @@
 import ApiService from "../../services/api";
-import * as userTypes from "../ActionTypes/UserActionTypes";
+import * as userTypes from "../ActionTypes/userActionTypes";
 import { handleType } from "./handleTypes";
 
 export const getUsers = (payload, token) => (dispatch) => {

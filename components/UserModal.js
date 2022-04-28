@@ -5,8 +5,10 @@ import { createUser, updateUser } from "../redux/Actions/userActions";
 import { refreshToken } from "../redux/Actions/authActions";
 import global from "../resourses/global";
 import { Normal14, Normal18, SemiBold20 } from "../resourses/palettes";
+import { useTranslation } from "react-i18next";
 
 const UserModal = ({ hideModal, updateData }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [login, setLogin] = useState("");
@@ -34,12 +36,10 @@ const UserModal = ({ hideModal, updateData }) => {
   return (
     <ModalWrap>
       <ModalView>
-        <SemiBold20 color={global.colors.main}>
-          Янги фойдаланувчи яратиш
-        </SemiBold20>
+        <SemiBold20 color={global.colors.main}>{t("createNewUser")}</SemiBold20>
         <InputWrap>
           <Normal18 color={global.colors.gray1} ml={15}>
-            Логин
+            {t("login")}:
           </Normal18>
           <Input
             value={updateData ? updateLogin : login}
@@ -50,19 +50,19 @@ const UserModal = ({ hideModal, updateData }) => {
         </InputWrap>
         <InputWrap>
           <Normal18 color={global.colors.gray1} ml={15}>
-            Пароль
+            {t("password")}:
           </Normal18>
           <Input value={password} onChangeText={(e) => setPassword(e)} />
         </InputWrap>
         <BtnWrap>
           <Button onPress={hideModal} color={global.colors.red}>
-            <Normal14 color={global.colors.white}>Бекор қилиш</Normal14>
+            <Normal14 color={global.colors.white}>{t("cancel")}</Normal14>
           </Button>
           <Button
             onPress={() => handleSend()}
             disabled={!login && !password && !updateLogin ? true : false}
           >
-            <Normal14 color={global.colors.white}>Сақлаш</Normal14>
+            <Normal14 color={global.colors.white}>{t("save")}</Normal14>
           </Button>
         </BtnWrap>
       </ModalView>
