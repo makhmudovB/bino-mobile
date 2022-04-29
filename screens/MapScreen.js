@@ -9,6 +9,7 @@ import Loading from "../components/Loading";
 import { Normal14, Normal18, SemiBold16 } from "../resourses/palettes";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import * as Linking from "expo-linking";
 
 const MapScreen = () => {
   const navigation = useNavigation();
@@ -111,9 +112,13 @@ const MapScreen = () => {
           <Normal14 color={global.colors.gray1} mt={15}>
             {t("phoneNumber")}:
           </Normal14>
-          <Normal18 color={global.colors.main} mt={5}>
-            {chosenData?.phone}
-          </Normal18>
+          <TouchableOpacity
+            onPress={() => Linking.openURL(`tel:${chosenData?.phone}`)}
+          >
+            <Normal18 color={global.colors.main} mt={5} textDecor="underline">
+              {chosenData?.phone}
+            </Normal18>
+          </TouchableOpacity>
           <Normal14 color={global.colors.gray1} mt={15}>
             {t("address")}:
           </Normal14>

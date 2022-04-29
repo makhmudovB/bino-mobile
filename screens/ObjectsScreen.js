@@ -148,6 +148,7 @@ const ObjectsScreen = () => {
         data={arr}
       /> */}
       <SearchBlock
+        mask={true}
         value={searchValue}
         onChange={setSearchValue}
         onPress={() => handleSearch()}

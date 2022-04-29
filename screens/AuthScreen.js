@@ -7,6 +7,12 @@ import Loading from "../components/Loading";
 import global from "../resourses/global";
 import { Bold40, Normal14, Normal18 } from "../resourses/palettes";
 import { useTranslation } from "react-i18next";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 export const AuthScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -39,27 +45,38 @@ export const AuthScreen = ({ navigation }) => {
         barStyle={"light-content"}
         bgColor={global.colors.main2}
       />
-      <Bold40 color={global.colors.white}>{t("enter")}</Bold40>
-      <Normal18 color={global.colors.gray3} mt={15} mb={30}>
-        {t("continueEnter")}
-      </Normal18>
-      <Input
-        placeholder={t("login")}
-        value={login}
-        onChangeText={(e) => setLogin(e)}
-      />
-      <Input
-        secureTextEntry={true}
-        placeholder={t("password")}
-        value={password}
-        onChangeText={(e) => setPassword(e)}
-      />
-      <Button
-        onPress={() => handleSend()}
-        disabled={!login && !password ? true : false}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "android" || "ios" ? "position" : "height"}
+        style={{ width: "100%" }}
       >
-        <Normal14 color={global.colors.main}>{t("enter")}</Normal14>
-      </Button>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <CenterWrap>
+            <Bold40 color={global.colors.white}>{t("enter")}</Bold40>
+            <Normal18 color={global.colors.gray3} mt={15} mb={30}>
+              {t("continueEnter")}
+            </Normal18>
+            <Input
+              placeholder={t("login")}
+              value={login}
+              onChangeText={(e) => setLogin(e)}
+              keyboardType="default"
+              returnKeyType="done"
+            />
+            <Input
+              secureTextEntry={true}
+              placeholder={t("password")}
+              value={password}
+              onChangeText={(e) => setPassword(e)}
+            />
+            <Button
+              onPress={() => handleSend()}
+              disabled={!login && !password ? true : false}
+            >
+              <Normal14 color={global.colors.main}>{t("enter")}</Normal14>
+            </Button>
+          </CenterWrap>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </AuthWrap>
   );
 };
@@ -70,6 +87,11 @@ const AuthWrap = styled.View`
   align-items: center;
   justify-content: center;
   padding: 0 25px;
+`;
+
+const CenterWrap = styled.View`
+  justify-content: center;
+  align-items: center;
 `;
 
 const Input = styled.TextInput`

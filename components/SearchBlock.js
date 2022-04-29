@@ -1,20 +1,39 @@
 import React from "react";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import global from "../resourses/global";
 import { Normal14 } from "../resourses/palettes";
 import { useTranslation } from "react-i18next";
+import { TextInputMask } from "react-native-masked-text";
 
-const SearchBlock = ({ value, onChange, onPress, clear }) => {
+const SearchBlock = ({ value, onChange, onPress, clear, mask = false }) => {
   const { t } = useTranslation();
   return (
     <InputWrap>
-      <Input value={value} onChangeText={(e) => onChange(e)} />
+      {!mask ? (
+        <Input value={value} onChangeText={(e) => onChange(e)} />
+      ) : (
+        <TextInputMask
+          type="custom"
+          options={{
+            mask: "99:99:99:99:99:9999",
+          }}
+          placeholder="XX:XX:XX:XX:XX:XXXX"
+          placeholderTextColor={global.colors.gray3}
+          keyboardType={"numeric"}
+          returnKeyType={"done"}
+          value={value}
+          color={global.colors.main}
+          onChangeText={(e) => onChange(e)}
+          maxLength={19}
+          style={styles.inputMask}
+        />
+      )}
       {value.length > 0 && (
         <TouchableOpacity onPress={clear}>
           <Image
             source={global.images.clear}
-            style={{ width: 13, height: 13, marginRight: 5 }}
+            style={{ width: 15, height: 15, marginRight: 5 }}
           />
         </TouchableOpacity>
       )}
@@ -27,6 +46,15 @@ const SearchBlock = ({ value, onChange, onPress, clear }) => {
 };
 
 export default SearchBlock;
+
+const styles = StyleSheet.create({
+  inputMask: {
+    width: "70%",
+    height: 40,
+    color: global.colors.main,
+    fontWeight: "600",
+  },
+});
 
 const InputWrap = styled.View`
   width: 100%;

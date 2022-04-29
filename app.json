@@ -4,7 +4,7 @@
     "slug": "mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/unicon-logo.png",
+    "icon": "./assets/icon.jpg",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -17,17 +17,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "makhmudov.binoMobile"
     },
     "android": {
       "package": "makhmudov.binoMobile",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/unicon-logo.png",
+        "foregroundImage": "./assets/icon.jpg",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/unicon-logo.png"
+      "favicon": "./assets/icon.jpg"
     }
   }
 }

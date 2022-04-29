@@ -17,6 +17,7 @@ export const Normal18 = styled.Text`
   margin-top: ${({ mt = 0 }) => mt}px;
   margin-bottom: ${({ mb = 0 }) => mb}px;
   margin-left: ${({ ml = 0 }) => ml}px;
+  text-decoration: ${({ textDecor = "none" }) => textDecor};
 `;
 
 export const SemiBold14 = styled.Text`
