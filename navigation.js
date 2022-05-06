@@ -12,6 +12,7 @@ import global from "./resourses/global";
 import MapScreen from "./screens/MapScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import { useTranslation } from "react-i18next";
+import OrganizationsScreen from "./screens/OrganizationsScreen";
 
 const Stack = createStackNavigator();
 const AppContainer = () => {
@@ -19,11 +20,11 @@ const AppContainer = () => {
 
   const [drawer, setDrawer] = useState(false);
 
-  const { response, token } = useSelector((state) => state.auth);
+  const { response, access } = useSelector((state) => state.auth);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={!!token ? "Users" : "Auth"}>
+      <Stack.Navigator initialRouteName={!!access ? "Users" : "Auth"}>
         <Stack.Screen
           name="Auth"
           options={{
@@ -63,6 +64,22 @@ const AppContainer = () => {
             gestureEnabled: false,
           }}
           component={ObjectsScreen}
+        />
+        <Stack.Screen
+          name="Organizations"
+          options={{
+            header: () => (
+              <Header
+                barStyle={"dark-content"}
+                bgColor={global.colors.white}
+                title={t("organizations")}
+                role={response?.role}
+                openDrawer={() => setDrawer(true)}
+              />
+            ),
+            gestureEnabled: false,
+          }}
+          component={OrganizationsScreen}
         />
         <Stack.Screen
           name="ShowObject"

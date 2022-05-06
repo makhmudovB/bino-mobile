@@ -119,7 +119,6 @@ const Button = styled.TouchableOpacity`
   justify-content: center;
   background-color: ${({ color = global.colors.main }) => color};
   border-radius: 15px;
-  margin-left: 10px;
 `;
 
 const RowBetween = styled.View`

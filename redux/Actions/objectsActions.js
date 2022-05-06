@@ -28,3 +28,18 @@ export const getObjectsById = (id, token) => (dispatch) => {
       dispatch(handleType(objectsTypes.OBJECTS_FAIL_BY_ID, error))
     );
 };
+
+export const getObjectsByOrganizations = (payload, token) => (dispatch) => {
+  const { organization, limit } = payload;
+  dispatch(handleType(objectsTypes.OBJECTS_START_BY_ORG));
+  return ApiService.getResources(
+    `/v1/building/generalinformation/?organization=${organization}&limit=${limit}`,
+    token
+  )
+    .then((value) => {
+      dispatch(handleType(objectsTypes.OBJECTS_SUCCESS_BY_ORG, value));
+    })
+    .catch((error) =>
+      dispatch(handleType(objectsTypes.OBJECTS_FAIL_BY_ORG, error))
+    );
+};

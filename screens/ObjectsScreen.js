@@ -5,7 +5,10 @@ import global from "../resourses/global";
 import SelectBlock from "../components/SelectBlock";
 import GridItem from "../components/GridItem";
 import { useDispatch, useSelector } from "react-redux";
-import { getObjects } from "../redux/Actions/objectsActions";
+import {
+  getObjects,
+  getObjectsByOrganizations,
+} from "../redux/Actions/objectsActions";
 import Loading from "../components/Loading";
 import { getRegions } from "../redux/Actions/regionsActions";
 import SearchBlock from "../components/SearchBlock";
@@ -72,7 +75,7 @@ import { refreshToken } from "../redux/Actions/authActions";
 //   },
 // ];
 
-const ObjectsScreen = () => {
+const ObjectsScreen = ({ route }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -84,7 +87,9 @@ const ObjectsScreen = () => {
   const [chosen, setChosen] = useState(0);
 
   const { access, token } = useSelector((state) => state.auth);
-  const { objects, objLoading } = useSelector((state) => state.objects);
+  const { objects, objectsByOrg, objLoading } = useSelector(
+    (state) => state.objects
+  );
   // const { regions, regionLoading } = useSelector((state) => state.regions);
 
   const params = {
@@ -128,6 +133,15 @@ const ObjectsScreen = () => {
     dispatch(getObjects(params, access?.data?.access));
   }, [access]);
 
+  const objParams = {
+    organization: route?.params?.id,
+    limit: 10,
+  };
+
+  useEffect(() => {
+    dispatch(getObjectsByOrganizations(objParams, access?.data?.access));
+  }, [access]);
+
   useEffect(() => {
     dispatch(refreshToken({ refresh: token }));
   }, [token]);
@@ -155,37 +169,69 @@ const ObjectsScreen = () => {
         clear={() => setSearchValue("")}
       />
       <GridWrap>
-        {objects.map((el, i) => {
-          const created =
-            el.created_by?.profile?.name && el.created_by?.profile?.surname;
-          const updated =
-            el.updated_by?.profile?.name && el.updated_by?.profile?.surname;
-          const { id } = el;
-          return (
-            <GridItem
-              key={i + 1}
-              onPress={() => navigation.navigate("ShowObject", { id })}
-              // disabled={select ? true : false}
-              num={el.cadastral_number}
-              orgName={el.organization?.name_cyr}
-              year={el.year_construction}
-              count={el.building_count}
-              objCount={el.number_buildings}
-              created={
-                created
-                  ? `${el.created_by?.profile?.name} ${el.created_by?.profile?.surname}`
-                  : "-"
-              }
-              edited={
-                updated
-                  ? `${el.updated_by?.profile?.name} ${el.updated_by?.profile?.surname}`
-                  : "-"
-              }
-              openCreatedModal={() => createdInfo(el)}
-              openEditedModal={updated ? () => editedInfo(el) : null}
-            />
-          );
-        })}
+        {objectsByOrg
+          ? objectsByOrg?.results?.map((el, i) => {
+              const created =
+                el.created_by?.profile?.name && el.created_by?.profile?.surname;
+              const updated =
+                el.updated_by?.profile?.name && el.updated_by?.profile?.surname;
+              const { id } = el;
+              return (
+                <GridItem
+                  key={i + 1}
+                  onPress={() => navigation.navigate("ShowObject", { id })}
+                  // disabled={select ? true : false}
+                  num={el.cadastral_number}
+                  orgName={el.organization?.name_cyr}
+                  year={el.year_construction}
+                  count={el.building_count}
+                  objCount={el.number_buildings}
+                  created={
+                    created
+                      ? `${el.created_by?.profile?.name} ${el.created_by?.profile?.surname}`
+                      : "-"
+                  }
+                  edited={
+                    updated
+                      ? `${el.updated_by?.profile?.name} ${el.updated_by?.profile?.surname}`
+                      : "-"
+                  }
+                  openCreatedModal={created ? () => createdInfo(el) : null}
+                  openEditedModal={updated ? () => editedInfo(el) : null}
+                />
+              );
+            })
+          : objects.map((el, i) => {
+              const created =
+                el.created_by?.profile?.name && el.created_by?.profile?.surname;
+              const updated =
+                el.updated_by?.profile?.name && el.updated_by?.profile?.surname;
+              const { id } = el;
+              return (
+                <GridItem
+                  key={i + 1}
+                  onPress={() => navigation.navigate("ShowObject", { id })}
+                  // disabled={select ? true : false}
+                  num={el.cadastral_number}
+                  orgName={el.organization?.name_cyr}
+                  year={el.year_construction}
+                  count={el.building_count}
+                  objCount={el.number_buildings}
+                  created={
+                    created
+                      ? `${el.created_by?.profile?.name} ${el.created_by?.profile?.surname}`
+                      : "-"
+                  }
+                  edited={
+                    updated
+                      ? `${el.updated_by?.profile?.name} ${el.updated_by?.profile?.surname}`
+                      : "-"
+                  }
+                  openCreatedModal={created ? () => createdInfo(el) : null}
+                  openEditedModal={updated ? () => editedInfo(el) : null}
+                />
+              );
+            })}
       </GridWrap>
       <Modal
         animationType="fade"

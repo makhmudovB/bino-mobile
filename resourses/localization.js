@@ -48,6 +48,10 @@ export const localization = {
       createUser: "Фойдаланувчи яратиш",
       have: "Эга",
       notHave: "Эга эмас",
+      organizations: "Ташкилотлар",
+      orgList: "Ташкилотлар рўйхати",
+      objCount: "Объектлар сони",
+      orgCount: "Ташкилотлар сони",
     },
   },
   uz: {
@@ -99,6 +103,10 @@ export const localization = {
       createUser: "Foydalanuvchi yaratish",
       have: "Ega",
       notHave: "Ega emas",
+      organizations: "Tashkilotlar",
+      orgList: "Tashkilotlar ro'yxati",
+      objCount: "Obyektlar soni",
+      orgCount: "Tashkilotlar soni",
     },
   },
   ru: {
@@ -150,6 +158,10 @@ export const localization = {
       createUser: "Создать пользователя",
       have: "Имеет",
       notHave: "Не имеет",
+      organizations: "Организации",
+      orgList: "Список организаций",
+      objCount: "Количество объектов",
+      orgCount: "Количество организаций",
     },
   },
 };

@@ -7,7 +7,7 @@ import global from "../resourses/global";
 import { Normal14, Normal18, SemiBold20 } from "../resourses/palettes";
 import { useTranslation } from "react-i18next";
 
-const UserModal = ({ hideModal, updateData }) => {
+const UserModal = ({ hideModal, updateData, orgData }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ const UserModal = ({ hideModal, updateData }) => {
     const body = {
       login_name: updateData ? updateLogin : login,
       password: password,
-      organization: 10,
+      organization: orgData ? orgData?.id : 10,
       role: 3,
     };
     if (updateData) {

@@ -24,16 +24,21 @@ const Drawer = ({ closeDrawer }) => {
     },
     {
       id: 2,
+      name: t("organizations"),
+      route: "Organizations",
+    },
+    {
+      id: 3,
       name: t("objects"),
       route: "Objects",
     },
     {
-      id: 3,
+      id: 4,
       name: t("map"),
       route: "Map",
     },
     {
-      id: 4,
+      id: 5,
       name: t("settings"),
       route: "Settings",
     },

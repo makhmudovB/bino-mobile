@@ -4,6 +4,7 @@ import { objectsReducer } from "./objectsReducer";
 import { regionsReducer } from "./regionsReducer";
 import { userReducer } from "./userReducer";
 import { languageReducer } from "./languageReducer";
+import { organizationsReducer } from "./organizationsReducer";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   objects: objectsReducer,
   regions: regionsReducer,
   language: languageReducer,
+  organizations: organizationsReducer,
 });

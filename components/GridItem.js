@@ -13,14 +13,13 @@ const GridItem = ({
   objCount,
   created,
   edited,
-  disabled,
   onPress,
   openCreatedModal,
   openEditedModal,
 }) => {
   const { t } = useTranslation();
   return (
-    <GridBlock disabled={disabled}>
+    <GridBlock>
       <TouchableOpacity onPress={onPress}>
         <Normal14 color={global.colors.gray1}>{t("cadNum")}:</Normal14>
         <SemiBold16 color={global.colors.main} mt={5}>
@@ -79,7 +78,7 @@ const GridBlock = styled.View`
   min-height: 250px;
   background-color: ${global.colors.gray2};
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 20px;
   border-radius: 15px;
 `;
