@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Image, TouchableOpacity, Clipboard } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import { Marker } from "react-native-maps";
+import MapView from "react-native-map-clustering";
 import styled from "styled-components/native";
 import global from "../resourses/global";
 import { useDispatch, useSelector } from "react-redux";

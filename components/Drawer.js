@@ -19,8 +19,8 @@ const Drawer = ({ closeDrawer }) => {
   const arr = [
     {
       id: 1,
-      name: t("users"),
-      route: "Users",
+      name: t("statistic"),
+      route: "Statistic",
     },
     {
       id: 2,
@@ -34,11 +34,16 @@ const Drawer = ({ closeDrawer }) => {
     },
     {
       id: 4,
+      name: t("users"),
+      route: "Users",
+    },
+    {
+      id: 5,
       name: t("map"),
       route: "Map",
     },
     {
-      id: 5,
+      id: 6,
       name: t("settings"),
       route: "Settings",
     },

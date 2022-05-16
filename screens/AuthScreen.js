@@ -23,7 +23,7 @@ export const AuthScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const routing = () => navigation.replace("Users");
+  const routing = () => navigation.replace("Statistic");
 
   const handleSend = () => {
     const body = {
@@ -94,7 +94,9 @@ const CenterWrap = styled.View`
   align-items: center;
 `;
 
-const Input = styled.TextInput`
+const Input = styled.TextInput.attrs({
+  placeholderTextColor: global.colors.gray4,
+})`
   background-color: ${global.colors.white};
   width: 100%;
   height: 40px;

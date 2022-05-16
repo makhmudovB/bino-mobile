@@ -10,6 +10,7 @@ const colors = {
   gray4: "#9e9e9e",
   blue: "#00C6FF",
   red: "#ff0000",
+  green: "#00FF00",
 };
 
 export default colors;

@@ -5,7 +5,7 @@ const images = {
   error: require("../assets/error.png"),
   clear: require("../assets/clear.png"),
   goBack: require("../assets/goBack.png"),
-  pin: require("../assets/pin.png"),
+  pin: require("../assets/pin3.png"),
 };
 
 export default images;

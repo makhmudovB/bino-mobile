@@ -169,7 +169,7 @@ const ObjectsScreen = ({ route }) => {
         clear={() => setSearchValue("")}
       />
       <GridWrap>
-        {objectsByOrg
+        {objectsByOrg?.results?.length > 0
           ? objectsByOrg?.results?.map((el, i) => {
               const created =
                 el.created_by?.profile?.name && el.created_by?.profile?.surname;
